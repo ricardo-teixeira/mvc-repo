@@ -11,21 +11,22 @@ class Login_Model extends Model {
         $login      = strip_tags(trim($_POST['login']));
         $password   = strip_tags(trim($_POST['password']));
         
-        $stmt = $this->db->prepare("SELECT id FROM users WHERE login = :login AND password = MD5(:password)");
-        $stmt->execute(array(
+        $sth = $this->db->prepare("SELECT id, role FROM users WHERE login = :login AND password = MD5(:password)");
+        $sth->execute(array(
             ':login'    => $login,
             ':password' => $password
         ));
         
-        //$data = $stmt->fetch();
-        
-        $count = $stmt->rowCount();
+        $data = $sth->fetch();
+
+        $count = $sth->rowCount();
         if ($count > 0) {
             Session::init();
             Session::set('loggedIn', true);
-            header('location: '. URL . 'dashboard');
+            Session::set('role', $data['role']);
+            header('Location: '. URL . 'dashboard');
         } else {
-            header('location: '. URL . 'login');
+            header('Location: '. URL . 'login');
         }
 
     }

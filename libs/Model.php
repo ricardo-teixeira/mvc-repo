@@ -2,8 +2,14 @@
 
 class Model {
 
-    function __construct() {
-        $this->db = new Database();
-    }
+	function __construct() {
+		try {
+			$this->db = new Database();
+		} catch (Exception $e) {
+			echo "Could not connect to database.";
+			exit;
+		}
+		
+	}
 
 }
