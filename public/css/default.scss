@@ -1,0 +1,38 @@
+$bg-default: #F8F8F8;
+
+#header {
+	.navbar {
+		margin-bottom: 0;
+	}
+}
+
+.jumbotron {
+	text-align: center;
+}
+
+.page-header {
+	margin-bottom: 30px;
+}
+
+#form-add-user {
+	margin: 30px 0;
+}
+
+#listInserts {
+	margin-top: 20px;
+	li {
+		&:hover {
+			background: $bg-default;
+		}
+	}
+	.del {
+		float: right;
+	}
+}
+
+#footer {
+	background: $bg-default;
+	padding: 30px 0;
+	border-top: 1px solid #e7e7e7;
+	margin-top: 30px;
+}
