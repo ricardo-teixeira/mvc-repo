@@ -7,7 +7,7 @@
 		<div class="input-group">
 			<input type="text" name="text" class="form-control input-lg" placeholder="Add text...">
 			<span class="input-group-btn">
-				<button class="btn btn-success input-lg" type="submit">Add!</button>
+				<button class="btn btn-success input-lg" type="submit"><i class="fa fa-plus"></i> Add</button>
 			</span>
 		</div><!-- /input-group -->
 

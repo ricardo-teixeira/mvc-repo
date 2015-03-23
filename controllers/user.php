@@ -36,7 +36,7 @@ class User extends Controller {
     }
 
     public function edit($id) {
-        $this->view->user = $this->model->singleUser($id);
+        $this->view->user = $this->model->userSingle($id);
         $this->view->render('user/edit');
     }
 
@@ -45,7 +45,7 @@ class User extends Controller {
         $data               = array();
         $data['id']         = strip_tags(trim($id));
         $data['login']      = strip_tags(trim($_POST['login']));
-        $data['password']   = strip_tags(trim(md5($_POST['password'])));
+        $data['password']   = strip_tags(trim($_POST['password']));
         $data['role']       = strip_tags(trim($_POST['role']));
 
         // TODO: Error checking...
@@ -55,8 +55,9 @@ class User extends Controller {
     }
 
     public function delete($id) {
+
         $this->model->delete($id);
-        header('Location: ' . URL . 'user');
+        header('location: ' . URL . 'user');
     }
 
 }

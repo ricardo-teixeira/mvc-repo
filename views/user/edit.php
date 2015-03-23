@@ -1,8 +1,6 @@
 <div class="container">
 	<h1 class="page-header">Users Edit</h1>
 
-	<?php var_dump($this->user) ;?>
-
 	<form id="form-add-user" action="<?php echo URL; ?>user/save/<?php echo $this->user['id']; ?>" method="post">
 		<div class="form-group">
 			<label for="login">Login</label>
@@ -21,7 +19,7 @@
 			</select>
 		</div>
 		<div class="form-group">
-			<button type="submit" class="btn btn-primary">Edit</button>
+			<button type="submit" class="btn btn-primary">Save</button>
 		</div>
 	</form>
 

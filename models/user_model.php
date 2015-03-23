@@ -1,75 +1,57 @@
 <?php
 
-class User_Model extends Model {
+class User_Model extends Model
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
     
-    public function singleUser($id) {
-
-        try {
-            $sth = $this->db->prepare('SELECT id, login, password, role FROM users WHERE id = :id');
-            $sth->execute(array(':id'=> $id));
-            return $sth->fetch(PDO::FETCH_ASSOC);
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-        
+    public function userSingle($id)
+    {
+        return $this->db->select('SELECT id, login, password, role FROM user WHERE id = :id', array(':id'=> $id));
     }
 
-    public function userList() {
-        
-        try {
-            $sth = $this->db->query('SELECT id, login, role FROM users');
-            $sth->execute();
-            return $sth->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-        
+    public function userList()
+    {
+        return $this->db->select('SELECT id, login, role FROM user');
     }
 
-    public function create($data) {
+    public function create($data)
+    {
 
-        try {
-            $sth = $this->db->prepare('INSERT INTO users (login, password, role) VALUES (:login, :password, :role)');
-            $sth->execute(array(
-                ':login'    => $data['login'],
-                ':password' => md5($data['password']),
-                ':role'     => $data['role']
-                ));
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-        
-    }
-
-    public function save($data) {
-
-        try {
-            $sth = $this->db->prepare('UPDATE users SET login = :login, password = :password, role = :role WHERE id = :id');
-            $sth->execute(array(
-                ':id'       => $data['id'],
-                ':login'    => $data['login'],
-                ':password' => md5($data['password']),
-                ':role'     => $data['role']
-                ));
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
+        $this->db->insert('user', array(
+            'login'     => $data['login'],
+            'password'  => Hash::create('sha256', $data['password'], HASH_PASSWORD_KEY),
+            'role'      => $data['role']
+            ));
 
     }
 
-    public function delete($id) {
+    public function save($data)
+    {
 
-        try {
-            $sth = $this->db->prepare('DELETE FROM users WHERE id = :id');
-            $sth->execute(array(':id' => $id));
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }      
+        $postData = array(
+            'login'     => $data['login'],
+            'password'  => Hash::create('sha256', $data['password'], HASH_PASSWORD_KEY),
+            'role'      => $data['role']
+        );
 
+        $this->db->update('user', $postData, "`id` = {$data['id']}");
+
+    }
+
+    public function delete($id)
+    {
+
+        $result = $this->db->select('SELECT role FROM user WHERE id = :id', array(':id' => $id));
+
+        if($result[0]['role'] == 'owner')
+            return false;
+
+        $this->db->delete('user', "id = '$id'");
+    
     }
     
 }

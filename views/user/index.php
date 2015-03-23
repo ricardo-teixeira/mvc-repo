@@ -40,7 +40,7 @@
 						<td><?php echo $user['login']; ?></td>
 						<td><?php echo $user['role']; ?></td>
 						<td class="text-right">
-							<a class="btn btn-danger" href="<?php echo URL; ?>user/delete/<?php echo $user['id']; ?>" title="Delete"><i class="fa fa-trash-o"></i></a>
+							<a class="btn btn-danger <?php echo ($user['role'] == 'owner') ? 'disabled' : ''; ?>" href="<?php echo URL; ?>user/delete/<?php echo $user['id']; ?>" title="Delete"><i class="fa fa-trash-o"></i></a>
 							<a class="btn btn-default" href="<?php echo URL; ?>user/edit/<?php echo $user['id']; ?>" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
 						</td>
 					</tr>

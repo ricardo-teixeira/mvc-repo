@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <!-- <script src="<?php echo URL; ?>public/js/jquery.js" type="text/javascript"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+    <script src="<?php echo URL; ?>public/js/bootstrap.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="<?php echo URL; ?>public/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="<?php echo URL; ?>public/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="<?php echo URL; ?>public/css/default.css"/>
-    <script src="<?php echo URL; ?>public/js/jquery.js" type="text/javascript"></script>
-    <script src="<?php echo URL; ?>public/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="<?php echo URL; ?>public/js/custom.js" type="text/javascript"></script>
     <?php
     if (isset($this->js)) {
