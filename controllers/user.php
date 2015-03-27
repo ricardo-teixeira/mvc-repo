@@ -4,15 +4,7 @@ class User extends Controller {
 
     function __construct() {
         parent::__construct();
-        Session::init();
-        $logged = Session::get('loggedIn');
-        $role = Session::get('role');
-        
-        if($logged == false || $role != 'owner') {
-            Session::destroy();
-            header('Location: '. URL . 'login');
-            exit;
-        }
+        Auth::handleLogin();
         
     }
 
@@ -35,15 +27,15 @@ class User extends Controller {
 
     }
 
-    public function edit($id) {
-        $this->view->user = $this->model->userSingle($id);
+    public function edit($user_id) {
+        $this->view->user = $this->model->userSingle($user_id);
         $this->view->render('user/edit');
     }
 
-    public function save($id) {
+    public function save($user_id) {
 
         $data               = array();
-        $data['id']         = strip_tags(trim($id));
+        $data['user_id']    = strip_tags(trim($user_id));
         $data['login']      = strip_tags(trim($_POST['login']));
         $data['password']   = strip_tags(trim($_POST['password']));
         $data['role']       = strip_tags(trim($_POST['role']));
@@ -54,9 +46,9 @@ class User extends Controller {
         header('Location: ' . URL . 'user');
     }
 
-    public function delete($id) {
+    public function delete($user_id) {
 
-        $this->model->delete($id);
+        $this->model->delete($user_id);
         header('location: ' . URL . 'user');
     }
 

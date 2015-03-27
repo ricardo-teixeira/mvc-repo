@@ -49,6 +49,7 @@
           <ul class="nav navbar-nav navbar-right">
             <?php if (Session::get('loggedIn') == true):?>
                 <li><a href="<?php echo URL; ?>dashboard">Dashboard</a></li>
+                <li><a href="<?php echo URL; ?>note">Notes</a></li>
                 
                 <?php if (Session::get('role') == 'owner'):?>
                     <li><a href="<?php echo URL; ?>user">Users</a></li>

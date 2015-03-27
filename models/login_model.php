@@ -16,7 +16,7 @@ class Login_Model extends Model
 
         try {
 
-            $sth = $this->db->prepare("SELECT id, role FROM user WHERE login = :login AND password = :password");
+            $sth = $this->db->prepare("SELECT user_id, role FROM user WHERE login = :login AND password = :password");
             $sth->execute(array(
                 ':login'    => $login,
                 ':password' => Hash::create('sha256', $password, HASH_PASSWORD_KEY)
@@ -29,6 +29,7 @@ class Login_Model extends Model
                 Session::init();
                 Session::set('loggedIn', true);
                 Session::set('role', $data['role']);
+                Session::set('user_id', $data['user_id']);
                 header('Location: '. URL . 'dashboard');
             } else {
                 header('Location: '. URL . 'login');
