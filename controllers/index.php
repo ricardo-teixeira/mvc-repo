@@ -2,16 +2,17 @@
 
 class Index extends Controller {
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();;  
     }
     
-    public function index() {
+    public function index()
+    {
+        $this->view->title = 'Home';
+        $this->view->render('header');
         $this->view->render('index/index');
-    }
-    
-    public function details() {
-        $this->view->render('index/index');
+        $this->view->render('footer');
     }
 
 }

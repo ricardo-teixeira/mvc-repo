@@ -1,5 +1,5 @@
 <div class="container">
-	<h1 class="page-header">Note</h1>
+	<h1 class="page-header">Notes</h1>
 
 	<form id="form-add-note" class="alert bg-info" action="<?php echo URL; ?>note/create" method="post">
 		<div class="form-group">
